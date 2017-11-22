@@ -2,10 +2,11 @@
 
 Repozitorij z gradivi pri predmetu APPR v študijskem letu 2017/18
 
-## Tematika
+## Gozdarstvo v Sloveniji in njenih sosednjih državah
 
-Izbrali si boste temo, s katero se bo vaš projekt ukvarjal. Tukaj boste
-napisali, kje ste dobili podatke, ter kakšen je vaš cilj.
+Analizirala bom površino gozdov v Sloveniji skozi čas in podatke primerjala s sosednjimi državami (Avstrijo, Madžarsko, Hrvaško in Italijo). Za Slovenijo bom podrobneje analizirala posek, letni prirastek, zaloge lesa ter število gozdov (in ha) kmetijskih gospodarstev po slovenskih regijah. Med omenjenimi državami bom primerjala število zaposlenih v gozdarstvu skozi čas, glede na stopnjo izobrazbe in spol. V analizo bom vključila tudi tabelo, ki prikazuje delež zaščitenih gozdov v državah. 
+
+Podatki se nahajajo v mapi podatki.
 
 ## Program
 
