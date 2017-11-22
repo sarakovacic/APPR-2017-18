@@ -6,7 +6,22 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2017/18
 
 Analizirala bom površino gozdov v Sloveniji skozi čas in podatke primerjala s sosednjimi državami (Avstrijo, Madžarsko, Hrvaško in Italijo). Za Slovenijo bom podrobneje analizirala posek, letni prirastek, zaloge lesa ter število gozdov (in ha) kmetijskih gospodarstev po slovenskih regijah. Med omenjenimi državami bom primerjala število zaposlenih v gozdarstvu skozi čas, glede na stopnjo izobrazbe in spol. V analizo bom vključila tudi tabelo, ki prikazuje delež zaščitenih gozdov v državah. 
 
-Podatki se nahajajo v mapi podatki.
+Podatkovne vire sem pridobila iz spletnih strani SURS in EUROSTAT in se nahajajo v mapi podatki. Pridobila sem 4 csv tabele in eno oblike htm. 
+
+**Zasnova TIDY DATA oblike:**
+
+*1.tabela:*
+Stolpci: Leto, država, površina gozdov
+*2. tabela:*
+Stolpci: Leto, država, izobrazba, spol 
+*3.tabela:*
+Stolpci: Leto, regija, površina gozdov, število kmetij
+*4.tabela:*
+Stolpci: Leto, država, delež zaščitenih gozdov
+
+**Plan dela**  
+- razvrščanje (iskanje skupin podatkov, ki so si podobni - npr. v državi, ki ima večji delež površine gozdov, je več zaposlenih v gozdarstvu)
+- predikcija (napovedovanje zaposljivosti v gozdarski panogi, glede na trende spreminjanja površine gozdov, napovedovanje spreminjanja površine gozdov glede na trende iz preteklosti)
 
 ## Program
 
