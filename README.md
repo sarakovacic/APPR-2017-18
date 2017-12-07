@@ -12,7 +12,7 @@ Podatkovne vire sem pridobila iz spletnih strani SURS in EUROSTAT in se nahajajo
 
 *1.tabela:* Stolpci: Leto, država, površina gozda
 
-*2. tabela:* Stolpci: Leto, država, izobrazba, spol 
+*2.tabela:* Stolpci: Leto, država, izobrazba, spol 
 
 *3.tabela:* Stolpci: Leto, površina gozda, letni prirastek, posek lesa, lesna zaloga
 
