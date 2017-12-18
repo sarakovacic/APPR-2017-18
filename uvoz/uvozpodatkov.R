@@ -4,7 +4,6 @@
 # 2. faza: Uvoz podatkov
 
 library(rvest)
-library(gsubfn)
 library(readr)
 library(dplyr)
 
@@ -30,3 +29,15 @@ zaposlitev$zastava <- NULL
 zaposlitev$enota <- NULL
 zaposlitev$bv <- NULL
 zaposlitev$status <- NULL
+
+#Uvoz tretje csv tabele iz SURS-a
+ 
+gozd_slo <- read_csv2("podatki/gozdvslo.csv", locale = locale(encoding = "Windows-1250"),
+                     skip = 1)
+gozd_slo <- gozd_slo[-c(1, 6, 7, 8, 9, 10), ]
+gozd_slo2 <- as.data.frame(t(gozd_slo))
+
+names(gozd_slo2) <- c("povrsina gozda", "Letni prirastek","Lesna zaloga ", "Posek lesa")
+gozd_slo2 <- cbind(leto = rownames(gozd_slo2), gozd_slo2) #imena vrstic v nov stolpec "leto"
+
+
