@@ -6,17 +6,17 @@
 library(rvest)
 library(readr)
 library(dplyr)
+library(tidyr)
 
 # Uvoz prve csv tabele iz eurostata
 
-stolpci <- c("Leto","Država","enota","gozd", "Površina gozda", "zastava")
 povrsina_gozda <- read_csv("podatki/forestarea.csv", locale = locale(encoding = "Windows-1250"), 
-                           col_names = c("Leto","Drzava","enota","gozd","Povrsina gozda","Zastava"),
+                           col_names = c("leto","drzava","enota","gozd","Povrsina gozda","zastava"),
                            skip = 1)
                                    
 povrsina_gozda$enota <- NULL
 povrsina_gozda$gozd <- NULL
-povrsina_gozda$Zastava <- NULL
+povrsina_gozda$zastava <- NULL
 
 #Uvoz druge csv tabele iz eurostata 
 
@@ -45,7 +45,24 @@ rownames(gozd_slo2) <- c()  #izbris imena vrstic
 
 #Uvoz cetrte tabele (.htm)
 
-# rawHTML <- paste(readLines("podatki/regije.htm")) ???
+regije <- read_html("podatki/regije.htm", encoding = "Windows-1250") %>%
+  html_node(xpath="//table") %>% html_table()
+leta <- regije[1, ] %>% unlist()
+stolpci <- regije[2, ] %>% unlist()
+stolpci.povrsina <- grep("ha", stolpci)
+stolpci.stevilo <- grep("kmetijskih", stolpci)
+regije.povrsina <- regije[regije[, 1] == "Gozd", c(2, stolpci.povrsina)]
+regije.stevilo <- regije[regije[, 1] == "Gozd", c(2, stolpci.stevilo)]
+colnames(regije.povrsina) <- c("regija", leta[stolpci.povrsina])
+colnames(regije.stevilo) <- c("regija", leta[stolpci.stevilo])
+regije.tidy <- inner_join(melt(regije.povrsina, id.vars = "regija",
+                               variable.name = "leto", value.name = "povrsina"),
+                          melt(regije.stevilo, id.vars = "regija",
+                               variable.name = "leto", value.name = "stevilo")) %>%
+  mutate(leto = parse_number(leto),
+         povrsina = parse_number(povrsina, na = "N"),
+         stevilo = parse_number(stevilo, na = "N"))
+Encoding(regije.tidy$regija) <- "UTF-8"
 
 #Uvoz pete csv tabele iz EUROSTATA
 
