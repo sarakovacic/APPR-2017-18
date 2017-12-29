@@ -37,7 +37,24 @@ gozd_slo <- read_csv2("podatki/gozdvslo.csv", locale = locale(encoding = "Window
 gozd_slo <- gozd_slo[-c(1, 6, 7, 8, 9, 10), ]
 gozd_slo2 <- as.data.frame(t(gozd_slo))
 
-names(gozd_slo2) <- c("povrsina gozda", "Letni prirastek","Lesna zaloga ", "Posek lesa")
+names(gozd_slo2) <- c("povrsina gozda", "letni prirastek","lesna zaloga ", "posek lesa")
 gozd_slo2 <- cbind(leto = rownames(gozd_slo2), gozd_slo2) #imena vrstic v nov stolpec "leto"
 
+gozd_slo2 <- gozd_slo2[-c(1), ] #izbris 1.vrstice
+rownames(gozd_slo2) <- c()  #izbris imena vrstic
+
+#Uvoz cetrte tabele (.htm)
+
+# rawHTML <- paste(readLines("podatki/regije.htm")) ???
+
+#Uvoz pete csv tabele iz EUROSTATA
+
+zascita <- read_csv("podatki/zascita gozdov.csv.csv", 
+                    locale = locale(encoding = "Windows-1250"),
+                    col_names = c("leto", "enota", "drzava", "nekaj", "vrednost", "zastava"),
+                    skip = 1, na= c("",":"))
+zascita$nekaj <- NULL
+zascita$zastava <- NULL
+                    
+                    
 
