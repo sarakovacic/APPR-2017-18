@@ -7,6 +7,8 @@ library(rvest)
 library(readr)
 library(dplyr)
 library(tidyr)
+library(XML)
+library(reshape2)
 
 # Uvoz prve csv tabele iz eurostata
 
