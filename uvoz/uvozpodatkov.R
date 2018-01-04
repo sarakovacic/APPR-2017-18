@@ -48,7 +48,7 @@ rownames(gozd_slo2) <- c()  #izbris imena vrstic
 #Uvoz cetrte tabele (.htm)
 
 regije <- read_html("podatki/regije.htm", encoding = "Windows-1250") %>%
-  html_node(xpath="//table") %>% html_table()
+  html_node(xpath="//table") %>% html_table(fill = TRUE)
 leta <- regije[1, ] %>% unlist()
 stolpci <- regije[2, ] %>% unlist()
 stolpci.povrsina <- grep("ha", stolpci)
@@ -71,9 +71,11 @@ Encoding(regije.tidy$regija) <- "UTF-8"
 zascita <- read_csv("podatki/zascita gozdov.csv.csv", 
                     locale = locale(encoding = "Windows-1250"),
                     col_names = c("leto", "enota", "drzava", "nekaj", "vrednost", "zastava"),
-                    skip = 1, na= c("",":"))
+                    skip = 1, na= c("",":")) %>% spread(enota, vrednost)   
 zascita$nekaj <- NULL
 zascita$zastava <- NULL
-                    
-                    
+#colnames(zascita)[colnames(zascita)=="Percentage"] <- "procent zascitenega gozda" 
+colnames(zascita)[colnames(zascita)=="Thousand hectares"] <- "1000 Ha"
+
+                  
 

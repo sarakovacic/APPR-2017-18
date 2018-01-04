@@ -18,7 +18,7 @@ Podatkovne vire sem pridobila iz spletnih strani SURS in EUROSTAT in se nahajajo
 
 *4.tabela:* Stolpci: Leto, regija, površina gozda, število kmetij
 
-*5.tabela:* Stolpci: Leto, država, delež zaščitenega gozda
+*5.tabela:* Stolpci: Leto, država, delež zaščitenega gozda, površina zaščitenega gozda
 
 **Plan dela**  
 - razvrščanje (iskanje skupin podatkov, ki so si podobni - npr. v državi, ki ima večji delež površine gozda, je več zaposlenih v gozdarstvu)

@@ -1,5 +1,6 @@
 ---
 title: "Poročilo pri predmetu Analiza podatkov s programom R"
+subtitle : "Gozdarstvo v Sloveniji in njenih sosednjih državah"
 author: "Sara Kovačič"
 output:
   html_document: default
@@ -21,7 +22,9 @@ source("lib/libraries.r", encoding = "UTF-8")
 
 # Izbira teme
 
-Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
+Analizirala bom površino gozdov v Sloveniji skozi čas in podatke primerjala s sosednjimi državami (Avstrijo, Madžarsko, Hrvaško in Italijo). Za Slovenijo bom podrobneje analizirala posek, letni prirastek, zaloge lesa ter število gozdov (in ha) kmetijskih gospodarstev po slovenskih regijah. Med omenjenimi državami bom primerjala število zaposlenih v gozdarstvu skozi čas, glede na stopnjo izobrazbe in spol. V analizo bom vključila tudi tabelo, ki prikazuje delež zaščitenih gozdov v državah. 
+
+Podatkovne vire sem pridobila iz spletnih strani SURS in EUROSTAT in se nahajajo v mapi podatki. Pridobila sem 4 csv tabele in eno oblike htm. 
 
 ***
 
@@ -31,13 +34,12 @@ Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
 source("uvoz/uvoz.r", encoding = "UTF-8")
 ```
 
-Uvozili smo podatke o občinah v obliki CSV s statističnega urada ter v obliki HTML
-z Wikipedije. Podatke imamo v dveh razpredelnicah v obliki *tidy data*.
+Uvozila sem podatke v obliki CSV in htm s statističnega urada in EUROSTATA. Podatki so v petih razpredelnicah v obliki *tidy data*.
 
-1. `druzine` - podatki o družinah za vsako občino
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `velikost.druzine` - spremenljivka: število otrok v družini (število: 1, 2, 3 ali 4, kjer zadnja vrednost pomeni 4 ali več),
-  - `stevilo.druzin` - meritev: število družin z ustreznim številom otrok v ustrezni občini (število).
+1. *ime tabele*
+  - `leto` - spremenljivka: leto meritve
+  - `drzava` - spremenljivka: ime drzave (neurejen faktor),
+  - `povrsina gozda` - meritev: površina gozda (število)
 
 2. `obcine` - podatki o občinah
   - `obcina` - spremenljivka: ime občine (neurejen faktor),
@@ -49,6 +51,17 @@ z Wikipedije. Podatke imamo v dveh razpredelnicah v obliki *tidy data*.
   - `pokrajina` - meritev: pokrajina, ki ji občina pripada (neurejen faktor),
   - `regija` - meritev: regija, ki ji občina pripada (neurejen faktor),
   - `odcepitev` - meritev: podatki o občinah, od katerih se je občina odcepila (besedilo).
+
+3.
+
+4.
+
+5. *ime tabele*
+  - 'leto' - spremenljivka: leto meritve
+  - 'drzava' - spremenljivka: država meritve
+  - 'procent zascitenega gozda'- meritev: delež koliko gozda v državi je zaščitenega
+  - '1000 Ha'- meritev: površina zaščitenega gozda v državi
+
 
 **Opomba**: da bi razpredelnica `obcine` res bila v obliki *tidy data*, bi morali odstraniti stolpec `gostota` (saj je izpeljan iz stolpcev `povrsina` in `prebivalci`), podatke o pokrajinah pa bi morali premakniti v drugo razpredelnico, saj nekatere občine pripadajo dvema pokrajinama. Podobno bi morali narediti tudi s stolpcem `odcepitev`.
 
