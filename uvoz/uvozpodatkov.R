@@ -13,7 +13,7 @@ library(reshape2)
 # Uvoz prve csv tabele iz eurostata
 
 povrsina_gozda <- read_csv("podatki/forestarea.csv", locale = locale(encoding = "Windows-1250"), 
-                           col_names = c("leto","drzava","enota","gozd","Povrsina gozda","zastava"),
+                           col_names = c("leto","drzava","enota","gozd","povrsina","zastava"),
                            skip = 1)
                                    
 povrsina_gozda$enota <- NULL
@@ -39,7 +39,7 @@ gozd_slo <- read_csv2("podatki/gozdvslo.csv", locale = locale(encoding = "Window
 gozd_slo <- gozd_slo[-c(1, 6, 7, 8, 9, 10), ]
 gozd_slo2 <- as.data.frame(t(gozd_slo))
 
-names(gozd_slo2) <- c("povrsina gozda", "letni prirastek","lesna zaloga ", "posek lesa")
+names(gozd_slo2) <- c("povrsina", "prirastek","zaloga ", "posek")
 gozd_slo2 <- cbind(leto = rownames(gozd_slo2), gozd_slo2) #imena vrstic v nov stolpec "leto"
 
 gozd_slo2 <- gozd_slo2[-c(1), ] #izbris 1.vrstice
@@ -66,6 +66,8 @@ regije.tidy <- inner_join(melt(regije.povrsina, id.vars = "regija",
          stevilo = parse_number(stevilo, na = "N"))
 Encoding(regije.tidy$regija) <- "UTF-8"
 
+regije.tidy <- regije.tidy[-c(1, 14, 27, 40, 53, 66), ]
+
 #Uvoz pete csv tabele iz EUROSTATA
 
 zascita <- read_csv("podatki/zascita gozdov.csv.csv", 
@@ -74,7 +76,7 @@ zascita <- read_csv("podatki/zascita gozdov.csv.csv",
                     skip = 1, na= c("",":")) %>% spread(enota, vrednost)   
 zascita$nekaj <- NULL
 zascita$zastava <- NULL
-#colnames(zascita)[colnames(zascita)=="Percentage"] <- "procent zascitenega gozda" 
+colnames(zascita)[colnames(zascita)=="Percentage"] <- "procent" 
 colnames(zascita)[colnames(zascita)=="Thousand hectares"] <- "1000 Ha"
 
                   
