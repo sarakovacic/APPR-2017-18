@@ -46,7 +46,7 @@ g3 <- ggplot(gozd_slo2) + aes(x= leto, y = povrsina, group = 1) +
   xlab("Leto") + ylab("Površina gozda") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
   ggtitle("Spreminjanje površine gozda skozi leta SLOVENIJA") 
-#print(g3)
+print(g3)
 
 ###########################################
 #ZEMLJEVID
@@ -56,7 +56,7 @@ library(digest)
 gpclibPermit()
 
 zemljevid <- uvozi.zemljevid("http://biogeo.ucdavis.edu/data/gadm2.8/shp/SVN_adm_shp.zip",
-                             "SVN_adm1", encoding = "") %>% pretvori.zemljevid()
+                             "SVN_adm1", encoding = "UTF8") %>% pretvori.zemljevid()
 
 
 levels(zemljevid$NAME_1)[levels(zemljevid$NAME_1) %in%
@@ -64,8 +64,8 @@ levels(zemljevid$NAME_1)[levels(zemljevid$NAME_1) %in%
                              "Spodnjeposavska")] <- c("Primorsko-notranjska", "Posavska")
 #========================================================================================================
 
+povprecje <- regije.tidy %>% group_by(regija) %>% summarise(povrsina = mean(povrsina, na.rm = TRUE))
 
-povprecje <- regije.tidy %>% group_by(leto, regija) %>% summarise(povrsina = mean(povrsina))
 
 zemljevid.regije1 <- ggplot() +
   geom_polygon(data = povprecje %>% right_join(zemljevid, by = c("regija" = "NAME_1")),
@@ -76,4 +76,16 @@ zemljevid.regije1 <- ggplot() +
 zemljevid.regije1 <- zemljevid.regije1 + scale_fill_gradient(low = "lightgreen", high = "darkgreen", space = "Lab",
                                         na.value = "grey50", guide = "colourbar")
 
-print(zemljevid.regije1) 
+#print(zemljevid.regije1) 
+
+#Zemljevid, ki prikazuje povprečno število "gozdarskih kmetij" v regiji 
+
+povprecjekmetij <- regije.tidy %>% group_by(regija) %>% summarise(stevilo = mean(stevilo, na.rm =TRUE))
+
+zemljevid.regije2<-ggplot() +
+  geom_polygon(data = povprecjekmetij %>% right_join(zemljevid, by = c("regija" = "NAME_1")),
+               aes(x =long, y = lat, group = group, fill = stevilo))
+
+zemljevid.regije2 <- zemljevid.regije2 + scale_fill_gradient2(low = "yellow", mid ="green", high = "darkblue", space = "Lab",
+                                                            na.value = "grey50", guide = "colourbar")
+#print(zemljevid.regije2)
