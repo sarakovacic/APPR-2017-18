@@ -18,13 +18,24 @@ g0 <- ggplot(povrsina_gozda) + aes( x = leto, y = povrsina, color = drzava) +
               theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
               ggtitle("Spreminjanje površine gozda skozi leta") +
               scale_color_discrete("Država")
-#print(g0)            
+#print(g0) 
+
+g00 <- ggplot(povrsina_gozda %>% filter(drzava != "Italy",
+                                        drzava != "Austria"), aes( x = leto, y = povrsina, color = drzava)) +
+              geom_line(size = 1) +
+              geom_point(size= 1.4) +
+              xlab("Leto") + ylab("Površina gozda") +
+              theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+              ggtitle("Spreminjanje površine gozda skozi leta") +
+              scale_color_discrete("Država")
 
 # Graf, ki prikazuje delež zaščitenega gozda v državah
 
 g1 <- ggplot(zascita) + aes(x = leto, y = procent, color = drzava) + geom_line()
 #print(g1)
 
+g11 <- ggplot(zascita %>% filter(drzava != "Italy"), 
+                          aes(x = leto, y = procent, color = drzava)) + geom_line(size=1.1)
 # ZAPOSLITEV v letu 2014
 
 
@@ -46,7 +57,14 @@ g3 <- ggplot(gozd_slo2) + aes(x= leto, y = povrsina, group = 1) +
   xlab("Leto") + ylab("Površina gozda") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
   ggtitle("Spreminjanje površine gozda skozi leta SLOVENIJA") 
-print(g3)
+#print(g3)
+
+g33 <- ggplot(gozd_slo2) + aes(x= leto, y = prirastek, group = 1) +
+  geom_line(color = 'pink', position = "jitter", size = 1.2) +
+  xlab("Leto") + ylab("Prirastek") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+  ggtitle("Letni prirastek površine gozda - Slovenija") 
+#print(g33)
 
 ###########################################
 #ZEMLJEVID
