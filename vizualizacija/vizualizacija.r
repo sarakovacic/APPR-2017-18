@@ -33,7 +33,9 @@ g2 <- ggplot(zaposlitev %>%
                       leto == "2014",
                       spol != "Total"),
              aes(x = Država, y = vrednost, fill = spol)) +
-  geom_bar(stat = "identity", position = "dodge") 
+  geom_bar(stat = "identity", position = "dodge") +
+  ggtitle("Odstotek zaposlenih v gozdarski panogi") +
+  xlab("Država") + ylab("Odstotek zaposlenih")
 #print(g2)
 
 #GOZDOVI V SLOVENIJI
@@ -71,7 +73,7 @@ zemljevid.regije1 <- ggplot() +
   xlab("") + ylab("") + ggtitle("Površina gozda po slovenskih regijah")
 
 
-zemljevid.regije1 + scale_fill_gradient(low = "#132B43", high = "#56B1F7", space = "Lab",
-                                       na.value = "grey50", guide = "colourbar")
+zemljevid.regije1 <- zemljevid.regije1 + scale_fill_gradient(low = "lightgreen", high = "darkgreen", space = "Lab",
+                                        na.value = "grey50", guide = "colourbar")
 
 print(zemljevid.regije1) 
