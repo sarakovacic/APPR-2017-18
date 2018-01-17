@@ -77,38 +77,45 @@ source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
 
 Spodnji graf prikazuje spreminjanje površine gozda v državah skozi leta. Kot vidimo, ima Italija daleč največjo površino gozda, vendar je to tudi razumljivo, saj je Italija toliko večja država. Iz grafa je razvidno, da površina gozda v Italiji veliko bolj narašča, kot v drugih državah.
 
+```{r g0, echo=FALSE, message=FALSE, fig.align='center'}
 print(g0)
-
+```
 Ker Italija toliko izstopa, graf Avstrije pa ni pretirano zanimiv, se mi je zdelo smiselno narediti še en graf, v katerega sem vključila samo Hrvaško, Mađarsko in Slovenijo. 
 
+```{r g00, echo=FALSE, message=FALSE, fig.align='center'}
 print(g00)
-
+```
 Podrobna grafa spodaj, prikazujeta spreminjanje površine gozda in letni prirastek samo za Slovenijo.
-
+```{r g3, echo=FALSE, message=FALSE, fig.align='center'}
 print(g3)
+```
+```{r g33, echo=FALSE, message=FALSE, fig.align='center'}
 print(g33)
-
+```
 Naslednji stolpični diagram prikazuje odstotek državljanov, ki so zaposleni v gozdarski panogi.Podatki so iz leta 2014. Kot vidimo spet prevladuje Italija, kjer je več kot 45% ljudi zaposlenih v gozdarstvu. Pričakovano je v gozdarstvu zaposlenih več moških kot žensk.
-
+```{r g2, echo=FALSE, message=FALSE, fig.align='center'}
 print(g2)
-
+```
 Naslednji graf prikazuje delež zaščitenega gozda v posamezni državi skozi leta, torej koliko odstotkov vseh gozdov v državi je zaščitenega. Zopet prevladuje Italija, ki ima zaščitegega več kot 75% vsega gozda. Opazimo trend padanja zaščite. 
-
+```{r g1, echo=FALSE, message=FALSE, fig.align='center'}
 print(g1)
-
+```
 Ker so ostale države veliko bolj zanimive brez Italije, poglejmo še ta graf. Opazimo, strm trend zaščite gozdov v Sloveniji po letu 2005 in padec zaščite na Madžarskem po letu 2000. 
 
+```{r g11, echo=FALSE, message=FALSE, fig.align='center'}
 print(g11)
-
+```
 
 Spodnji zemljevid prikazuje povprečno površino gozda po slovenskih regijah.
 
+```{r zemljevid.regije1, echo=FALSE, message=FALSE, fig.align='center'}
 print(zemljevid.regije1) 
-
+```
 Naslednji zemljevid pa prikazuje število kmetijskih gospodarstev, ki se ukvarjajo z gozdarstvom v posamezni regiji. Opazimo, da je glede na velikost regije, zelo veliko gozdarskih gospodarstev v Pomurski regiji, najmanj pa na Primorskem. 
 
+```{r zemljevid.regije2, echo=FALSE, message=FALSE, fig.align='center'}
 print(zemljevid.regije2)
-
+```
 ***
 
 # Napredna analiza podatkov
