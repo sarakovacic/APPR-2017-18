@@ -74,4 +74,4 @@ zemljevid.regije1 <- ggplot() +
 zemljevid.regije1 + scale_fill_gradient(low = "#132B43", high = "#56B1F7", space = "Lab",
                                        na.value = "grey50", guide = "colourbar")
 
-  
+print(zemljevid.regije1) 
