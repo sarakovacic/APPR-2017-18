@@ -48,23 +48,25 @@ Uvozila sem podatke v obliki CSV in htm s statističnega urada in EUROSTATA. Pod
   - 'spol'- spremenljivka: spol zaposlenih v gozdarski panogi
   - 'vrednost' - meritev: prikazuje % zaposlenih v gozdarstvu v državi
 
-3. *Stanje gozdov v Sloveniji* -> 2.tabeli
-  Iz ene tabele, sem ustvarila dve tabeli, saj drugače podatki ne bi bili v Tidy-Data obliki.
-     3.1: * gozd_slo *
-      - 'leto' - spremenljivka: leto meritve
-      - 'meritev' - spremenljivka: vrsta meritve(zaloga lesa, posek, letni prirastek) 
-      - 'kolicina' - meritev: površina merjena v 1000Ha
-     3.2: *povrisna_gozda_slo*
-      - 'leto'- spremenljivka: leto meritve
-      - 'povrsina'- meritev: površina gozda merjena v 1000Ha
 
-4. *Površina gozda v Sloveniji po regijah*
+  Iz ene tabele, sem ustvarila dve tabeli (3 in 4), saj drugače podatki ne bi bili v Tidy-Data obliki.
+  
+3. *Gozd_slo-stanje lesih zalog, poseka in prirastka*
+  - 'leto' - spremenljivka: leto meritve
+  - 'meritev' - spremenljivka: vrsta meritve(zaloga lesa, posek, letni prirastek) 
+  - 'kolicina' - meritev: površina merjena v 1000Ha
+      
+4. *povrsina_gozda_slo- Površina gozda v Sloveniji*
+  - 'leto'- spremenljivka: leto meritve
+  - 'povrsina'- meritev: površina gozda merjena v 1000Ha
+
+5. *Površina gozda v Sloveniji po regijah*
   - 'regija' - spremenljivka: ime regije (neurejen faktor)
   - 'leto' - spremenljivka: leto meritve
   - 'povrsina' - meritev: povrsina gozda v regiji
   - 'stevilo kmetij' - meritev: število kmetij, ki se ukvarja z gozdarstvom v regiji
 
-5. *Zaščita gozda*
+6. *Zaščita gozda*
   - 'leto' - spremenljivka: leto meritve
   - 'drzava' - spremenljivka: država meritve
   - 'procent zascitenega gozda'- meritev: delež koliko gozda v državi je zaščitenega
