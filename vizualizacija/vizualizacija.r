@@ -51,7 +51,7 @@ g2 <- ggplot(zaposlitev %>%
 
 #GOZDOVI V SLOVENIJI
 
-g3 <- ggplot(gozd_slo2) + aes(x= leto, y = povrsina, group = 1) +
+g3 <- ggplot(povrsina_gozda_slo) + aes(x= leto, y = povrsina, group = 1) +
   geom_line(size=1) +
   geom_point(size = 1.3) +
   xlab("Leto") + ylab("Površina gozda") +
@@ -59,12 +59,12 @@ g3 <- ggplot(gozd_slo2) + aes(x= leto, y = povrsina, group = 1) +
   ggtitle("Spreminjanje površine gozda skozi leta SLOVENIJA") 
 #print(g3)
 
-g33 <- ggplot(gozd_slo2) + aes(x= leto, y = prirastek, group = 1) +
+g33 <- ggplot(gozd_slo %>% filter(meritev == "Letni prirastek (1000 m3)")) +
+  aes(x = leto, y = kolicina, group = 1) +
   geom_line(color = 'pink', position = "jitter", size = 1.2) +
   xlab("Leto") + ylab("Prirastek") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
-  ggtitle("Letni prirastek površine gozda - Slovenija") 
-#print(g33)
+  ggtitle("Letni prirastek površine gozda - Slovenija")
 
 ###########################################
 #ZEMLJEVID
