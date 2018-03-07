@@ -20,27 +20,39 @@ povrsina_gozda$enota <- NULL
 povrsina_gozda$gozd <- NULL
 povrsina_gozda$zastava <- NULL
 
+povrsina_drzav <- matrix(c("Croatia", 5659.4, "Italy", 30133.8, "Hungary", 9303, "Austria", 8387.9 , "Slovenia", 2027.3), ncol = 2, byrow=TRUE)
+colnames(povrsina_drzav) <- c("drzava","velikostdrzave")
+
+nova <-  merge(povrsina_gozda, povrsina_drzav)
+nova$velikostdrzave = as.factor(nova$velikostdrzave)
+
+
+delez_povrsin <- mutate(nova, delez=(povrsina/velikostdrzave)*100)
+View(delez_povrsin)
+
 #Uvoz druge csv tabele iz eurostata 
 
 stolpci <- c("GEO","ISCED11","TIME","SEX","UNIT","WSTATUS","NACE_R2","Value","Flag and Footnotes")
 zaposlitev <- read_csv("podatki/zaposlitev v gozdarstvu vse drzave.csv.csv", locale = locale(encoding = "Windows-1250"),
                        col_names = c("Država", "izobrazba", "leto", "spol", "enota", "status", "bv", "vrednost", "zastava"),
-                       skip = 1,  na= c("",":") )
+                       skip = 1,  na = c("",":") )
 
 zaposlitev$zastava <- NULL
 zaposlitev$enota <- NULL
 zaposlitev$bv <- NULL
 zaposlitev$status <- NULL
 
-#Uvoz tretje csv tabele iz SURS-a
+#Uvoz tretje csv tabele iz SURS-a (nastaneta 2)
 
 gozd_slo <- read_csv2("podatki/gozdvslo.csv", locale = locale(encoding = "Windows-1250"),
                       skip = 2, n_max = 4) %>%
   melt(id.vars = 1, variable.name = "leto", value.name = "kolicina") %>%
   mutate(leto = parse_number(leto))
 colnames(gozd_slo)[1] <- "meritev"
+
 povrsina_gozda_slo <- gozd_slo %>% filter(meritev == "Površina gozda (ha)") %>%
   select(leto, povrsina = kolicina)
+
 gozd_slo <- gozd_slo %>% filter(meritev != "Površina gozda (ha)")
  
 

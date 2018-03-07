@@ -24,6 +24,8 @@ source("lib/libraries.r", encoding = "UTF-8")
 
 Analizirala bom površino gozdov v Sloveniji skozi čas in podatke primerjala s sosednjimi državami (Avstrijo, Madžarsko, Hrvaško in Italijo). Za Slovenijo bom podrobneje analizirala posek, letni prirastek, zaloge lesa ter število gozdov (in ha) kmetijskih gospodarstev po slovenskih regijah. Med omenjenimi državami bom primerjala število zaposlenih v gozdarstvu skozi čas, glede na stopnjo izobrazbe in spol. V analizo bom vključila tudi tabelo, ki prikazuje delež zaščitenih gozdov v državah. 
 
+![](https://daily.jstor.org/wp-content/uploads/2016/10/Moving_Forest_1050_700.jpg)
+
 Podatkovne vire sem pridobila iz spletnih strani SURS in EUROSTAT in se nahajajo v mapi podatki. Pridobila sem 4 csv tabele in eno oblike htm. 
 
 ***

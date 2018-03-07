@@ -45,8 +45,8 @@ g2 <- ggplot(zaposlitev %>%
                       spol != "Total"),
              aes(x = Država, y = vrednost, fill = spol)) +
   geom_bar(stat = "identity", position = "dodge") +
-  ggtitle("Odstotek zaposlenih v gozdarski panogi") +
-  xlab("Država") + ylab("Odstotek zaposlenih")
+  ggtitle("število 1000 zaposlenih v gozdarski panogi") +
+  xlab("Država") + ylab("število zaposlenih")
 #print(g2)
 
 #GOZDOVI V SLOVENIJI
