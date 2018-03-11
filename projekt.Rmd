@@ -22,7 +22,7 @@ source("lib/libraries.r", encoding = "UTF-8")
 
 # Izbira teme
 
-Analizirala bom površino gozdov v Sloveniji skozi čas in podatke primerjala s sosednjimi državami (Avstrijo, Madžarsko, Hrvaško in Italijo). Za Slovenijo bom podrobneje analizirala posek, letni prirastek, zaloge lesa ter število gozdov (in ha) kmetijskih gospodarstev po slovenskih regijah. Med omenjenimi državami bom primerjala število zaposlenih v gozdarstvu skozi čas, glede na stopnjo izobrazbe in spol. V analizo bom vključila tudi tabelo, ki prikazuje delež zaščitenih gozdov v državah. 
+Analizirala bom površino gozda v Sloveniji skozi čas in podatke primerjala s sosednjimi državami (Avstrijo, Madžarsko, Hrvaško in Italijo). Za Slovenijo bom podrobneje analizirala posek, letni prirastek, zaloge lesa ter število gozdov (in ha) kmetijskih gospodarstev po slovenskih regijah. Med omenjenimi državami bom primerjala število zaposlenih v gozdarstvu skozi čas, glede na stopnjo izobrazbe in spol. V analizo bom vključila tudi tabelo, ki prikazuje delež zaščitenih gozdov v državah. 
 
 ![](https://daily.jstor.org/wp-content/uploads/2016/10/Moving_Forest_1050_700.jpg)
 
@@ -48,7 +48,7 @@ Uvozila sem podatke v obliki CSV in htm s statističnega urada in EUROSTATA. Pod
   - 'izobrazba' - spremenljivka: prikazuje izobrazbo zaposlenih v gozdarski panogi
   - 'leto'- spremenljivka: leto meritve
   - 'spol'- spremenljivka: spol zaposlenih v gozdarski panogi
-  - 'vrednost' - meritev: prikazuje % zaposlenih v gozdarstvu v državi
+  - 'vrednost' - meritev: prikazuje število 1000 zaposlenih v gozdarstvu v državi
 
 
   Iz ene tabele, sem ustvarila dve tabeli (3 in 4), saj drugače podatki ne bi bili v Tidy-Data obliki.
@@ -99,10 +99,20 @@ print(g3)
 ```{r g33, echo=FALSE, message=FALSE, fig.align='center', warning =FALSE }
 print(g33)
 ```
-Naslednji stolpični diagram prikazuje odstotek državljanov, ki so zaposleni v gozdarski panogi.Podatki so iz leta 2014. Kot vidimo spet prevladuje Italija, kjer je več kot 45% ljudi zaposlenih v gozdarstvu. Pričakovano je v gozdarstvu zaposlenih več moških kot žensk.
+Naslednji stolpični diagram prikazuje število 1000 državljanov, ki so zaposleni v gozdarski panogi.Podatki so iz leta 2014.
+Pričakovano je v gozdarstvu zaposlenih več moških kot žensk.
 ```{r g2, echo=FALSE, message=FALSE, fig.align='center', warning =FALSE}
 print(g2)
 ```
+
+ Ker takšen graf ne pove veliko, je smiselno pogledati še graf, ki prikazuje odstotek zaposlenih.
+ 
+```{r g22, echo=FALSE, message=FALSE, fig.align='center', warning =FALSE}
+print(g22)
+```
+
+
+
 Naslednji graf prikazuje delež zaščitenega gozda v posamezni državi skozi leta, torej koliko odstotkov vseh gozdov v državi je zaščitenega. Zopet prevladuje Italija, ki ima zaščitegega več kot 75% vsega gozda. Opazimo trend padanja zaščite. 
 ```{r g1, echo=FALSE, message=FALSE, fig.align='center', warning =FALSE}
 print(g1)
@@ -113,10 +123,10 @@ Ker so ostale države veliko bolj zanimive brez Italije, poglejmo še ta graf. O
 print(g11)
 ```
 
-Spodnji zemljevid prikazuje povprečno površino gozda po slovenskih regijah.
+Spodnji zemljevid prikazuje povprečen delež površine gozdarskih kmetijskih gospodarstev po Slovenskih regijah.
 
-```{r zemljevid.regije1, echo=FALSE, message=FALSE, fig.align='center'}
-print(zemljevid.regije1) 
+```{r zemljevid.delez, echo=FALSE, message=FALSE, fig.align='center'}
+print(zemljevid.delez) 
 ```
 Naslednji zemljevid pa prikazuje število kmetijskih gospodarstev, ki se ukvarjajo z gozdarstvom v posamezni regiji. Opazimo, da je glede na velikost regije, zelo veliko gozdarskih gospodarstev v Pomurski regiji, najmanj pa na Primorskem. 
 

@@ -29,6 +29,14 @@ g00 <- ggplot(povrsina_gozda %>% filter(drzava != "Italy",
               ggtitle("Spreminjanje površine gozda skozi leta") +
               scale_color_discrete("Država")
 
+#graf, ki prikazuje spreminjanje deleža gozda v državah 
+g000 <- ggplot(delez_povrsin) + aes(x = leto, y=delez, color = drzava)+ geom_line(size = 1) +
+      geom_point(size= 1.4) +
+      xlab("Leto") + ylab("Delež gozda % ") +
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+      ggtitle("Spreminjanje deleža gozda v državah skozi leta") +
+      scale_color_discrete("Država")
+
 # Graf, ki prikazuje delež zaščitenega gozda v državah
 
 g1 <- ggplot(zascita) + aes(x = leto, y = procent, color = drzava) + geom_line()
@@ -45,14 +53,23 @@ g2 <- ggplot(zaposlitev %>%
                       spol != "Total"),
              aes(x = Država, y = vrednost, fill = spol)) +
   geom_bar(stat = "identity", position = "dodge") +
-  ggtitle("število 1000 zaposlenih v gozdarski panogi") +
-  xlab("Država") + ylab("število zaposlenih")
+  ggtitle("Število 1000 zaposlenih v gozdarski panogi") +
+  xlab("Država") + ylab("število zaposlenih v 1000")
 #print(g2)
+
+g22 <- ggplot(delez_zaposlenih %>%
+                filter(izobrazba == "All ISCED 2011 levels",
+                       leto == "2014",
+                       spol != "Total"),
+              aes(x = Država, y = delez, fill = spol)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  ggtitle("Delež zaposlenih v gozdarski panogi v letu 2014") +
+  xlab("Država") + ylab("Delež zaposlenih (%)")
 
 #GOZDOVI V SLOVENIJI
 
 g3 <- ggplot(povrsina_gozda_slo) + aes(x= leto, y = povrsina, group = 1) +
-  geom_line(size=1) +
+  geom_line(size=1, color = 'darkgreen') +
   geom_point(size = 1.3) +
   xlab("Leto") + ylab("Površina gozda") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
@@ -61,7 +78,7 @@ g3 <- ggplot(povrsina_gozda_slo) + aes(x= leto, y = povrsina, group = 1) +
 
 g33 <- ggplot(gozd_slo %>% filter(meritev == "Letni prirastek (1000 m3)")) +
   aes(x = leto, y = kolicina, group = 1) +
-  geom_line(color = 'pink', position = "jitter", size = 1.2) +
+  geom_line(color = 'green', position = "jitter", size = 1.2) +
   xlab("Leto") + ylab("Prirastek") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
   ggtitle("Letni prirastek površine gozda - Slovenija")
@@ -88,13 +105,23 @@ povprecje <- regije.tidy %>% group_by(regija) %>% summarise(povrsina = mean(povr
 zemljevid.regije1 <- ggplot() +
   geom_polygon(data = povprecje %>% right_join(zemljevid, by = c("regija" = "NAME_1")),
                aes(x = long, y = lat, group = group, fill = povrsina))+
-  xlab("") + ylab("") + ggtitle("Površina gozda po slovenskih regijah")
+  xlab("") + ylab("") + ggtitle("Površina gozdov kmetijskih gospodarstev po regijah ")
 
 
 zemljevid.regije1 <- zemljevid.regije1 + scale_fill_gradient(low = "lightgreen", high = "darkgreen", space = "Lab",
                                         na.value = "grey50", guide = "colourbar")
 
 #print(zemljevid.regije1) 
+
+povprecje2 <- delez_povrsin_regij %>% group_by(regija) %>% summarise(delez = mean(delez, na.rm = TRUE))
+
+zemljevid.delez <- ggplot()+ 
+  geom_polygon(data = povprecje2 %>% right_join(zemljevid, by = c("regija" = "NAME_1")),
+                                          aes(x = long, y = lat, group = group, fill = delez))+
+  xlab("") + ylab("") + ggtitle("Delež gozda kmetijskih gospodarstev v slovenskih regijah (%)")
+
+zemljevid.delez <- zemljevid.delez + scale_fill_gradient(low = "lightgreen", high = "darkgreen", space = "Lab",
+                                                             na.value = "grey50", guide = "colourbar")  
 
 #Zemljevid, ki prikazuje povprečno število "gozdarskih kmetij" v regiji 
 
@@ -104,6 +131,6 @@ zemljevid.regije2<-ggplot() +
   geom_polygon(data = povprecjekmetij %>% right_join(zemljevid, by = c("regija" = "NAME_1")),
                aes(x =long, y = lat, group = group, fill = stevilo))
 
-zemljevid.regije2 <- zemljevid.regije2 + scale_fill_gradient2(low = "yellow", mid ="green", high = "darkblue", space = "Lab",
+zemljevid.regije2 <- zemljevid.regije2 + scale_fill_gradient2(low = "yellow", mid ="green", high = "darkgreen", space = "Lab",
                                                             na.value = "grey50", guide = "colourbar")
 #print(zemljevid.regije2)

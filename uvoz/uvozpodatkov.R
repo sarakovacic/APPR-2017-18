@@ -24,11 +24,11 @@ povrsina_drzav <- matrix(c("Croatia", 5659.4, "Italy", 30133.8, "Hungary", 9303,
 colnames(povrsina_drzav) <- c("drzava","velikostdrzave")
 
 nova <-  merge(povrsina_gozda, povrsina_drzav)
-nova$velikostdrzave = as.factor(nova$velikostdrzave)
+nova$velikostdrzave = as.numeric(as.character(nova$velikostdrzave))
 
 
-delez_povrsin <- mutate(nova, delez=(povrsina/velikostdrzave)*100)
-View(delez_povrsin)
+delez_povrsin <- mutate(nova, delez= ( (povrsina/velikostdrzave)*100) )
+#View(delez_povrsin)
 
 #Uvoz druge csv tabele iz eurostata 
 
@@ -41,6 +41,16 @@ zaposlitev$zastava <- NULL
 zaposlitev$enota <- NULL
 zaposlitev$bv <- NULL
 zaposlitev$status <- NULL
+
+stevilo_prebivalcev <- matrix(c("Croatia", 4437.460, "Italy", 59530.464, "Hungary", 10075.034, "Austria", 8169.929 , "Slovenia", 2050.189), ncol = 2, byrow=TRUE)
+colnames(stevilo_prebivalcev) <- c("Država","prebivalci")
+
+nov <-  merge(zaposlitev, stevilo_prebivalcev)
+nov$prebivalci = as.numeric(as.character(nov$prebivalci))
+
+
+delez_zaposlenih <- mutate(nov, delez= ( (vrednost/prebivalci)*100) )
+
 
 #Uvoz tretje csv tabele iz SURS-a (nastaneta 2)
 
@@ -79,6 +89,23 @@ regije.tidy <- inner_join(melt(regije.povrsina, id.vars = "regija",
 Encoding(regije.tidy$regija) <- "UTF-8"
 
 regije.tidy <- regije.tidy[-c(1, 14, 27, 40, 53, 66), ]
+
+######  DELEZ  ######
+
+povrsina_regij <- matrix(c("Pomurska", 133700, "Podravska", 217000, "Koroška", 104100, 
+                           "Savinjska", 230100 , "Zasavska", 48500, "Posavska", 96800, 
+                           "Jugovzhodna Slovenija", 267500, "Osrednjeslovenska", 233400, 
+                           "Gorenjska", 213700, "Primorsko-notranjska", 145600, 
+                           "Goriška", 232500, "Obalno-kraška", 104400) ,ncol = 2, byrow=TRUE)
+colnames(povrsina_regij) <- c("regija","velikostregije")
+
+nova1 <-  merge(regije.tidy, povrsina_regij)
+nova1$velikostregije = as.numeric(as.character(nova1$velikostregije))
+
+
+delez_povrsin_regij <- mutate(nova1, delez = ( (povrsina/velikostregije)*100) )
+
+
 
 #Uvoz pete csv tabele iz EUROSTATA
 
