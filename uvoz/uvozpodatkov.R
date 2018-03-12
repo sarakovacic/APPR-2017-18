@@ -64,7 +64,8 @@ povrsina_gozda_slo <- gozd_slo %>% filter(meritev == "Površina gozda (ha)") %>%
   select(leto, povrsina = kolicina)
 
 gozd_slo <- gozd_slo %>% filter(meritev != "Površina gozda (ha)")
- 
+
+prirastek <- gozd_slo %>% filter(meritev != "Lesna zaloga (1000 m3)", meritev != "Posek lesa (1000 m3)")
 
 
 #Uvoz cetrte tabele (.htm)
