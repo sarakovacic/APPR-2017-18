@@ -98,23 +98,19 @@ Podrobna grafa spodaj, prikazujeta spreminjanje površine gozda in letni prirast
 
 ```{r g33, echo=FALSE, message=FALSE, fig.align='center', fig.show='hold', warning =FALSE }
 ```
-```{r g3, echo=FALSE, message=FALSE, fig.align='center', fig.show='hold', warning =FALSE }
-print(multiplot(g3, g33, cols = 1))
+```{r g3, echo=FALSE, message=FALSE, fig.align='center', warning =FALSE }
+ggarrange(g3, gg3, ncol = 2)
 ```
 
 
 Naslednji stolpični diagram prikazuje število 1000 državljanov, ki so zaposleni v gozdarski panogi.Podatki so iz leta 2014.
 Pričakovano je v gozdarstvu zaposlenih več moških kot žensk.
+Ker takšen graf ne pove veliko, je smiselno pogledati še graf, ki prikazuje odstotek zaposlenih.
 ```{r g2, echo=FALSE, message=FALSE, fig.align='center', warning =FALSE}
-print(g2)
+ggarrange(g2, g22, ncol = 2,common.legend = TRUE )
 ```
 
- Ker takšen graf ne pove veliko, je smiselno pogledati še graf, ki prikazuje odstotek zaposlenih.
  
-```{r g22, echo=FALSE, message=FALSE, fig.align='center', warning =FALSE}
-print(g22)
-```
-
 
 
 Naslednji graf prikazuje delež zaščitenega gozda v posamezni državi skozi leta, torej koliko odstotkov vseh gozdov v državi je zaščitenega. Zopet prevladuje Italija, ki ima zaščitegega več kot 75% vsega gozda. Opazimo trend padanja zaščite. 

@@ -5,37 +5,8 @@ library(dplyr)
 library(readr)
 library(tibble)
 library(shiny)
+library(ggpubr)
 
-##funkcija multiplot
-
-multiplot <- function(..., plotlist = NULL, file, cols = 1, layout = NULL) {
-  require(grid)
-  
-  plots <- c(list(...), plotlist)
-  
-  numPlots = length(plots)
-  
-  if (is.null(layout)) {
-    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
-                     ncol = cols, nrow = ceiling(numPlots/cols))
-  }
-  
-  if (numPlots == 1) {
-    print(plots[[1]])
-    
-  } else {
-    grid.newpage()
-    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
-    
-    for (i in 1:numPlots) {
-      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
-      
-      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
-                                      layout.pos.col = matchidx$col))
-    }
-  }
-}
-###############################################################
 
 #graf, ki prikazuje spreminjanje površine gozda skozi leta v državah
 
@@ -82,7 +53,8 @@ g2 <- ggplot(zaposlitev %>%
              aes(x = Država, y = vrednost, fill = spol)) +
   geom_bar(stat = "identity", position = "dodge") +
   ggtitle("Število 1000 zaposlenih v gozdarski panogi") +
-  xlab("Država") + ylab("število zaposlenih v 1000")
+  xlab("Država") + ylab("število zaposlenih v 1000")+
+  theme(plot.title = element_text(size = 10, face = "bold"))
 #print(g2)
 
 g22 <- ggplot(delez_zaposlenih %>%
@@ -91,27 +63,48 @@ g22 <- ggplot(delez_zaposlenih %>%
                        spol != "Total"),
               aes(x = Država, y = delez, fill = spol)) +
   geom_bar(stat = "identity", position = "dodge") +
-  ggtitle("Delež zaposlenih v gozdarski panogi v letu 2014") +
-  xlab("Država") + ylab("Delež zaposlenih (%)")
+  ggtitle("Delež zaposlenih v gozdarski panogi") +
+  xlab("Država") + ylab("Delež zaposlenih (%)") +
+  theme(plot.title = element_text(size = 10, face = "bold"))
 
 #GOZDOVI V SLOVENIJI
 
 g3 <- ggplot(povrsina_gozda_slo) + aes(x= leto, y = povrsina, group = 1) +
   geom_line(size=1, color = 'darkgreen') +
   geom_point(size = 1.3) +
-  xlab("Leto") + ylab("Površina gozda") +
+  xlab("Leto") + ylab("Površina gozda (Ha)" ) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
-  ggtitle("Spreminjanje površine gozda skozi leta SLOVENIJA") 
+  ggtitle("Spreminjanje površine-SLOVENIJA") +
+  theme(plot.title = element_text(size = 10, face = "bold"))
+
 #print(g3)
 
 g33 <- ggplot(gozd_slo %>% filter(meritev == "Letni prirastek (1000 m3)")) +
   aes(x = leto, y = kolicina, group = 1) +
   geom_line(color = 'green', position = "jitter", size = 1.2) +
-  xlab("Leto") + ylab("Prirastek") +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
-  ggtitle("Letni prirastek površine gozda - Slovenija")
+  xlab("Leto") + ylab("1000 m3") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) 
+  #ggtitle("Letni prirastek (1000 m3)") +
+  #theme(plot.title = element_text(size = 10, face = "bold"))
 
-# multiplot(g3, g33, cols = 1, layout = NULL)
+g333 <- ggplot(gozd_slo %>% filter(meritev == "Posek lesa (1000 m3)")) +
+  aes(x = leto, y = kolicina, group = 1) +
+  geom_line(color = 'brown', position = "jitter", size = 1.2) +
+  xlab("Leto") + ylab("Posek") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+  ggtitle("Letni posek (1000 m3)") +
+  theme(plot.title = element_text(size = 10, face = "bold"))
+
+gg3 <- g33 + geom_line(data= (gozd_slo %>% filter(meritev == "Posek lesa (1000 m3)")),
+                       color = 'brown', position = "jitter", size = 1.2) +
+  ggtitle("Letni prirastek in posek (1000 m3)") + 
+  scale_colour_manual("", values = c("green", "brown")) 
+  
+  
+  
+
+#ggarrange(g3, g33, ncol=2, font.label = list(size = 14, face = "bold", color ="red"))
+
 ###########################################
 #ZEMLJEVID
 library(sp)
