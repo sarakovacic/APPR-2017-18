@@ -87,6 +87,14 @@ g33 <- ggplot(gozd_slo %>% filter(meritev == "Letni prirastek (1000 m3)")) +
   #ggtitle("Letni prirastek (1000 m3)") +
   #theme(plot.title = element_text(size = 10, face = "bold"))
 
+gg33 <- ggplot(gozd_slo %>% filter(meritev == "Letni prirastek (1000 m3)")) +
+  aes(x = leto, y = kolicina, group = 1) +
+  geom_line(color = 'green', position = "jitter", size = 1.2) +
+  xlab("Leto") + ylab("1000 m3") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+  ggtitle("Letni prirastek (1000 m3)") 
+
+
 g333 <- ggplot(gozd_slo %>% filter(meritev == "Posek lesa (1000 m3)")) +
   aes(x = leto, y = kolicina, group = 1) +
   geom_line(color = 'brown', position = "jitter", size = 1.2) +
