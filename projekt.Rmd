@@ -141,7 +141,7 @@ print(zemljevid.regije2)
 source("analiza/analiza.r", encoding = "UTF-8")
 ```
 
-Z linearnim regrsijskim modelom sem poskušala oceniti gibanje površine gozda v Sloveniji in letni prirastek slovenskih gozdov. 
+Z linearnim regresijskim modelom sem poskušala oceniti gibanje površine gozda v Sloveniji in letni prirastek slovenskih gozdov. 
 
 ```{r napovedni_graf, echo=FALSE, message=FALSE, fig.align='center', warning =FALSE}
 print(napovedni_graf)
