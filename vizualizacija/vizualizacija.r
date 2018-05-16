@@ -38,7 +38,7 @@ g000 <- ggplot(delez_povrsin) + aes(x = leto, y=delez, color = drzava)+ geom_lin
 
 # Graf, ki prikazuje delež zaščitenega gozda v državah
 
-g1 <- ggplot(zascita) + aes(x = leto, y = procent, color = drzava) + geom_line()
+g1 <- ggplot(zascita) + aes(x = leto, y = procent, color = drzava) + geom_line(size=1.1)
 #print(g1)
 
 g11 <- ggplot(zascita %>% filter(drzava != "Italy"), 

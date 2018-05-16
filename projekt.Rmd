@@ -11,7 +11,7 @@ output:
 
 ---
 
-```{r setup, echo=FALSE, results='hide', message=FALSE}
+```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # Če želimo nastaviti pisave v PDF-ju, odkomentiramo
 # in sledimo navodilom v programu.
 #source("fontconfig.r", encoding = "UTF-8")
@@ -39,40 +39,40 @@ source("uvoz/uvozpodatkov.R", encoding = "UTF-8")
 Uvozila sem podatke v obliki CSV in htm s statističnega urada in EUROSTATA. Podatki so v petih razpredelnicah v obliki *tidy data*.
 
 1. *Površina gozda izbranih držav*
-  - 'leto' - spremenljivka: leto meritve
-  - 'drzava' - spremenljivka: ime drzave (neurejen faktor),
-  - 'povrsina gozda' - meritev: površina gozda (število)
+  - ``leto`` - spremenljivka: leto meritve
+  - ``drzava`` - spremenljivka: ime drzave (neurejen faktor),
+  - ``povrsina gozda`` - meritev: površina gozda (število)
   
 2. *Zaposlitev v gozdarski panogi*
-  - 'drzava' - spremenljivka: država meritve
-  - 'izobrazba' - spremenljivka: prikazuje izobrazbo zaposlenih v gozdarski panogi
-  - 'leto'- spremenljivka: leto meritve
-  - 'spol'- spremenljivka: spol zaposlenih v gozdarski panogi
-  - 'vrednost' - meritev: prikazuje število 1000 zaposlenih v gozdarstvu v državi
+  - ``drzava`` - spremenljivka: država meritve
+  - ``izobrazba`` - spremenljivka: prikazuje izobrazbo zaposlenih v gozdarski panogi
+  - ``leto``- spremenljivka: leto meritve
+  - ``spol``- spremenljivka: spol zaposlenih v gozdarski panogi
+  - ``vrednost`` - meritev: prikazuje število 1000 zaposlenih v gozdarstvu v državi
 
 
   Iz ene tabele, sem ustvarila dve tabeli (3 in 4), saj drugače podatki ne bi bili v Tidy-Data obliki.
   
 3. *Gozd_slo-stanje lesih zalog, poseka in prirastka*
-  - 'leto' - spremenljivka: leto meritve
-  - 'meritev' - spremenljivka: vrsta meritve(zaloga lesa, posek, letni prirastek) 
-  - 'kolicina' - meritev: površina merjena v 1000Ha
+  - ``leto``- spremenljivka: leto meritve
+  - ``meritev`` - spremenljivka: vrsta meritve(zaloga lesa, posek, letni prirastek) 
+  - ``kolicina`` - meritev: površina merjena v 1000Ha
       
 4. *povrsina_gozda_slo- Površina gozda v Sloveniji*
-  - 'leto'- spremenljivka: leto meritve
-  - 'povrsina'- meritev: površina gozda merjena v 1000Ha
+  - ``leto``- spremenljivka: leto meritve
+  - ``povrsina``- meritev: površina gozda merjena v 1000Ha
 
-5. *Površina gozda v Sloveniji po regijah*
-  - 'regija' - spremenljivka: ime regije (neurejen faktor)
-  - 'leto' - spremenljivka: leto meritve
-  - 'povrsina' - meritev: povrsina gozda v regiji
-  - 'stevilo kmetij' - meritev: število kmetij, ki se ukvarja z gozdarstvom v regiji
+5. *Površina gozdarskih kmetij v Sloveniji po regijah*
+  - ``regija`` - spremenljivka: ime regije (neurejen faktor)
+  - ``leto`` - spremenljivka: leto meritve
+  - ``povrsina`` - meritev: povrsina gozda v regiji
+  - ``stevilo kmetij`` - meritev: število kmetij, ki se ukvarja z gozdarstvom v regiji
 
 6. *Zaščita gozda*
-  - 'leto' - spremenljivka: leto meritve
-  - 'drzava' - spremenljivka: država meritve
-  - 'procent zascitenega gozda'- meritev: delež koliko gozda v državi je zaščitenega
-  - '1000 Ha'- meritev: površina zaščitenega gozda v državi
+  - ``leto`` - spremenljivka: leto meritve
+  - ``drzava``- spremenljivka: država meritve
+  - ``procent zascitenega gozda``- meritev: delež koliko gozda v državi je zaščitenega
+  - ``1000 Ha``- meritev: površina zaščitenega gozda v državi
   
 ***
 
@@ -113,7 +113,7 @@ ggarrange(g2, g22, ncol = 2,common.legend = TRUE )
  
 
 
-Naslednji graf prikazuje delež zaščitenega gozda v posamezni državi skozi leta, torej koliko odstotkov vseh gozdov v državi je zaščitenega. Zopet prevladuje Italija, ki ima zaščitegega več kot 75% vsega gozda. Opazimo trend padanja zaščite. 
+Naslednji graf prikazuje delež zaščitenega gozda v posamezni državi skozi leta, torej koliko odstotkov vseh gozdov v državi je zaščitenega. Zopet prevladuje Italija, ki ima zaščitenega več kot 75% vsega gozda. Opazimo trend padanja zaščite. 
 ```{r g1, echo=FALSE, message=FALSE, fig.align='center', warning =FALSE}
 print(g1)
 ```
