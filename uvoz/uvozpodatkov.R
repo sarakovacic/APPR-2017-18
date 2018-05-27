@@ -20,21 +20,23 @@ povrsina_gozda$enota <- NULL
 povrsina_gozda$gozd <- NULL
 povrsina_gozda$zastava <- NULL
 
-povrsina_drzav <- matrix(c("Croatia", 5659.4, "Italy", 30133.8, "Hungary", 9303, "Austria", 8387.9 , "Slovenia", 2027.3), ncol = 2, byrow=TRUE)
+povrsina_drzav <- matrix(c("Croatia", 5659.4, "Italy", 30133.8, "Hungary", 9303, 
+                           "Austria", 8387.9 , "Slovenia", 2027.3), ncol = 2, byrow=TRUE)
 colnames(povrsina_drzav) <- c("drzava","velikostdrzave")
 
 nova <-  merge(povrsina_gozda, povrsina_drzav)
 nova$velikostdrzave = as.numeric(as.character(nova$velikostdrzave))
 
 
-delez_povrsin <- mutate(nova, delez= ( (povrsina/velikostdrzave)*100) )
+delez_povrsin <- mutate(nova, delez=((povrsina/velikostdrzave)*100) )
 #View(delez_povrsin)
 
 #Uvoz druge csv tabele iz eurostata 
 
-stolpci <- c("GEO","ISCED11","TIME","SEX","UNIT","WSTATUS","NACE_R2","Value","Flag and Footnotes")
-zaposlitev <- read_csv("podatki/zaposlitev v gozdarstvu vse drzave.csv.csv", locale = locale(encoding = "Windows-1250"),
-                       col_names = c("Država", "izobrazba", "leto", "spol", "enota", "status", "bv", "vrednost", "zastava"),
+zaposlitev <- read_csv("podatki/zaposlitev v gozdarstvu vse drzave.csv.csv", 
+                       locale = locale(encoding = "Windows-1250"),
+                       col_names = c("Država", "izobrazba", "leto", "spol", "enota",
+                                     "status", "bv", "vrednost", "zastava"),
                        skip = 1,  na = c("",":") )
 
 zaposlitev$zastava <- NULL
@@ -42,14 +44,16 @@ zaposlitev$enota <- NULL
 zaposlitev$bv <- NULL
 zaposlitev$status <- NULL
 
-stevilo_prebivalcev <- matrix(c("Croatia", 4437.460, "Italy", 59530.464, "Hungary", 10075.034, "Austria", 8169.929 , "Slovenia", 2050.189), ncol = 2, byrow=TRUE)
+stevilo_prebivalcev <- matrix(c("Croatia", 4437.460, "Italy", 59530.464, "Hungary",
+                                10075.034, "Austria", 8169.929 , "Slovenia", 2050.189),
+                              ncol = 2, byrow=TRUE)
 colnames(stevilo_prebivalcev) <- c("Država","prebivalci")
 
 nov <-  merge(zaposlitev, stevilo_prebivalcev)
 nov$prebivalci = as.numeric(as.character(nov$prebivalci))
 
 
-delez_zaposlenih <- mutate(nov, delez= ( (vrednost/prebivalci)*100) )
+delez_zaposlenih <- mutate(nov, delez=((vrednost/prebivalci)*100) )
 
 
 #Uvoz tretje csv tabele iz SURS-a (nastaneta 2)
@@ -104,7 +108,7 @@ nova1 <-  merge(regije.tidy, povrsina_regij)
 nova1$velikostregije = as.numeric(as.character(nova1$velikostregije))
 
 
-delez_povrsin_regij <- mutate(nova1, delez = ( (povrsina/velikostregije)*100) )
+delez_povrsin_regij <- mutate(nova1, delez = ((povrsina/velikostregije)*100))
 
 
 
